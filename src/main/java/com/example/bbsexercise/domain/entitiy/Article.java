@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class Article {
@@ -18,6 +17,12 @@ public class Article {
     private Long id;
     private String title;
     private String content;
+
+    public Article(Long id, String title, String content) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
 
     @OneToMany(mappedBy = "article")
     private List<ArticleReply> replies = new ArrayList<>();
