@@ -23,7 +23,4 @@ public class Article {
         this.title = title;
         this.content = content;
     }
-
-    @OneToMany(mappedBy = "article")
-    private List<ArticleReply> replies = new ArrayList<>();
 }
