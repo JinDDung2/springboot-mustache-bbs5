@@ -44,7 +44,7 @@ public class ArticleController {
     public String save(ArticleDto articleDto) {
         Article saveArticle = articleDto.toEntity();
         repository.save(saveArticle);
-        return "redirect:/articles" + saveArticle.getId();
+        return "redirect:/articles/" + saveArticle.getId();
     }
 
     @GetMapping("/{id}")
@@ -56,5 +56,29 @@ public class ArticleController {
         } else {
             return "articles/errors/error";
         }
+    }
+
+    @GetMapping("{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        Optional<Article> findArticle = repository.findById(id);
+        if(!findArticle.isEmpty()) {
+            model.addAttribute("article", findArticle.get());
+            return "articles/edit";
+        } else {
+            return "articles/errors/error";
+        }
+    }
+
+    @PostMapping("{id}/update")
+    public String updateArticle(ArticleDto articleDto, Model model) {
+        Article saveArticle = repository.save(articleDto.toEntity());
+        model.addAttribute("article", saveArticle);
+        return "redirect:/articles/" + saveArticle.getId();
+    }
+
+    @GetMapping("{id}/delete")
+    public String deleteById(@PathVariable Long id) {
+        repository.deleteById(id);
+        return "redirect:/articles";
     }
 }
