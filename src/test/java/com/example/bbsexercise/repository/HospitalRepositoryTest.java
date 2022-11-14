@@ -47,7 +47,14 @@ class HospitalRepositoryTest {
         for (Hospital hospital : hospitals) {
             System.out.println("hospital = " + hospital.getHospitalName());
         }
+    }
 
+    @Test
+    void 병상수_10개이상_20개이하() {
+        List<Hospital> hospitals = hospitalRepository.findByTotalNumberOfBedsBetween(10, 20);
+        for (Hospital hospital : hospitals) {
+            System.out.printf("병원이름: %s, 병상수: %d \n", hospital.getHospitalName(), hospital.getTotalNumberOfBeds());
+        }
     }
 
 }
