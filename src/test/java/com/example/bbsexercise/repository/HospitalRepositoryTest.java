@@ -35,7 +35,10 @@ class HospitalRepositoryTest {
         inClues.add("보건소");
         inClues.add("보건지소");
         inClues.add("보건진료소");
-        hospitalRepository.findByBusinessTypeNameInAndRoadNameAddressContaining(inClues, "광진구");
+        List<Hospital> hospitals = hospitalRepository.findByBusinessTypeNameInAndRoadNameAddressContaining(inClues, "광진구");
+        for (Hospital hospital : hospitals) {
+            System.out.println("hospital = " + hospital.getHospitalName());
+        }
     }
 
     @Test
