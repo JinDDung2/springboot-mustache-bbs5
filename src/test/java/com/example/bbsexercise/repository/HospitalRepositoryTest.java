@@ -26,6 +26,25 @@ class HospitalRepositoryTest {
         for (Hospital hospital : hospitals) {
             System.out.println("hospital = " + hospital.getHospitalName());
         }
+        System.out.println("----------------------");
+    }
+
+    @Test
+    void 광진구_보건소_보건진료소_보건지소_찾기() {
+        List<String> inClues = new ArrayList<>();
+        inClues.add("보건소");
+        inClues.add("보건지소");
+        inClues.add("보건진료소");
+        hospitalRepository.findByBusinessTypeNameInAndRoadNameAddressContaining(inClues, "광진구");
+    }
+
+    @Test
+    void 부천시_한의원_찾기() {
+        List<Hospital> hospitals = hospitalRepository.findByBusinessTypeNameContainingAndRoadNameAddressContaining("한의원", "부천");
+        for (Hospital hospital : hospitals) {
+            System.out.println("hospital = " + hospital.getHospitalName());
+        }
+
     }
 
 }
