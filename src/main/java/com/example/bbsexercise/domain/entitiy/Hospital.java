@@ -37,6 +37,7 @@ public class Hospital {
                 hospital.getPatientRoomCount(),
                 hospital.getTotalNumberOfBeds(),
                 hospital.getBusinessTypeName(),
+                hospital.getBusinessTypeName(),
                 hospital.getTotalAreaSize()
         );
 
