@@ -1,5 +1,6 @@
 package com.example.bbsexercise.domain.entitiy;
 
+import com.example.bbsexercise.domain.dto.HospitalResponseDto;
 import lombok.Getter;
 
 import javax.persistence.Column;
@@ -26,4 +27,17 @@ public class Hospital {
     private String businessTypeName;
     private Float totalAreaSize;
 
+    /* Entity --> HospitalResponseDto*/
+    public static HospitalResponseDto of(Hospital hospital) {
+        return new HospitalResponseDto(
+                hospital.getId(),
+                hospital.getRoadNameAddress(),
+                hospital.getHospitalName(),
+                hospital.getPatientRoomCount(),
+                hospital.getTotalNumberOfBeds(),
+                hospital.getBusinessTypeName(),
+                hospital.getTotalAreaSize()
+        );
+
+    }
 }

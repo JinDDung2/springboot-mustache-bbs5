@@ -26,6 +26,15 @@ public class HospitalController {
         model.addAttribute("hospitals", hospitals);
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("hasPrevious", hospitals.hasPrevious());
+        model.addAttribute("hasNext", hospitals.hasNext());
         return "hospitals/list";
     }
+
+    /*@GetMapping("/search")
+    public String search(String keyword, Model model) {
+        List<Hospital> searchHospitals = service.search(keyword);
+        model.addAttribute("hospitals", searchHospitals);
+        return "hospitals";
+    }*/
 }
