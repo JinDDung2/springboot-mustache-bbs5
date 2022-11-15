@@ -3,6 +3,7 @@ package com.example.bbsexercise.controller;
 import com.example.bbsexercise.domain.dto.HospitalResponseDto;
 import com.example.bbsexercise.domain.entitiy.Hospital;
 import com.example.bbsexercise.repository.HospitalRepository;
+import com.example.bbsexercise.service.HospitalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +18,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class HospitalRestController {
 
-    private final HospitalRepository hospitalRepository;
+    private final HospitalService hospitalService;
 
     @GetMapping("/{id}")
     public ResponseEntity<HospitalResponseDto> get(@PathVariable Integer id) {
-        Optional<Hospital> findHospital = hospitalRepository.findById(id);
-        HospitalResponseDto hospitalResponseDto = Hospital.of(findHospital.get());
+        HospitalResponseDto hospitalResponseDto = hospitalService.getHospital(id);
         return ResponseEntity.ok().body(hospitalResponseDto);
     }
 }

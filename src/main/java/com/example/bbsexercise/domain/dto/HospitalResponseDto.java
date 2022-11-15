@@ -1,15 +1,12 @@
 package com.example.bbsexercise.domain.dto;
 
-import com.example.bbsexercise.domain.entitiy.Hospital;
-import lombok.Builder;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 
 @NoArgsConstructor
 @Getter
-@Builder
 public class HospitalResponseDto {
     private Integer id;
     private String roadNameAddress;
@@ -17,6 +14,7 @@ public class HospitalResponseDto {
     private Integer patientRoomCount;
     private Integer totalNumberOfBeds;
     private String businessTypeName;
+    private String businessStatusName;
     private Float totalAreaSize;
 
     public HospitalResponseDto(Integer id, String roadNameAddress, String hospitalName, Integer patientRoomCount, Integer totalNumberOfBeds, String businessTypeName, Float totalAreaSize) {
@@ -27,5 +25,9 @@ public class HospitalResponseDto {
         this.totalNumberOfBeds = totalNumberOfBeds;
         this.businessTypeName = businessTypeName;
         this.totalAreaSize = totalAreaSize;
+    }
+
+    public void setBusinessStatusName(String businessStatusName) {
+        this.businessStatusName = businessStatusName;
     }
 }

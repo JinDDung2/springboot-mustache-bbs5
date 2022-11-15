@@ -25,6 +25,7 @@ public class Hospital {
     private Integer patientRoomCount;
     private Integer totalNumberOfBeds;
     private String businessTypeName;
+    private Integer businessStatusCode;
     private Float totalAreaSize;
 
     /* Entity --> HospitalResponseDto*/
@@ -40,4 +41,5 @@ public class Hospital {
         );
 
     }
+
 }
