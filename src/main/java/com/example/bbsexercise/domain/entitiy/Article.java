@@ -1,5 +1,6 @@
 package com.example.bbsexercise.domain.entitiy;
 
+import com.example.bbsexercise.domain.dto.ArticleResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,11 @@ public class Article {
         this.id = id;
         this.title = title;
         this.content = content;
+    }
+
+    /* Entity --> dto*/
+    public static ArticleResponseDto of(Article article) {
+        return new ArticleResponseDto(
+                article.getId(), article.getTitle(), article.getContent());
     }
 }
