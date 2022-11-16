@@ -3,7 +3,6 @@ package com.example.bbsexercise.controller;
 import com.example.bbsexercise.domain.dto.ArticleRequestDto;
 import com.example.bbsexercise.domain.dto.ArticleResponseDto;
 import com.example.bbsexercise.service.ArticleService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,14 +35,14 @@ class ArticleRestControllerTest {
 
     @Test
     @DisplayName("Article 데이터 가져오기")
-    void getArticle() throws Exception {
+    void getById() throws Exception {
         ArticleResponseDto articleResponseDto = ArticleResponseDto.builder()
                 .id(1L)
                 .title("title1")
                 .content("content1")
                 .build();
 
-        given(articleService.getArticle(1L)).willReturn(articleResponseDto);
+        given(articleService.getById(1L)).willReturn(articleResponseDto);
         Long articleId = 1L;
 
         String url = String.format("/api/v1/articles/%d", articleId);
@@ -55,7 +54,7 @@ class ArticleRestControllerTest {
                 .andDo(print());
 
         //getArticle()메소드의 호출이 있었는지 확인
-        verify(articleService).getArticle(articleId);
+        verify(articleService).getById(articleId);
     }
 
     @Test
