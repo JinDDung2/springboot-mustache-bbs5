@@ -11,7 +11,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @WebMvcTest(ArticleRestController.class)
@@ -40,6 +42,10 @@ class ArticleRestControllerTest {
                 .andExpect(jsonPath("$.title").exists())
                 .andExpect(jsonPath("$.title").value("title1"))
                 .andExpect(jsonPath("$.content").exists())
-                .andExpect(jsonPath("$.content").value("content1"));
+                .andExpect(jsonPath("$.content").value("content1"))
+                .andDo(print());
+
+        //getArticle()메소드의 호출이 있었는지 확인
+        verify(articleService).getArticle(articleId);
     }
 }
