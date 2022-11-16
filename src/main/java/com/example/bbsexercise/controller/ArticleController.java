@@ -1,16 +1,13 @@
 package com.example.bbsexercise.controller;
 
-import com.example.bbsexercise.domain.dto.ArticleDto;
+import com.example.bbsexercise.domain.dto.ArticleRequestDto;
 import com.example.bbsexercise.domain.entitiy.Article;
 import com.example.bbsexercise.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,8 +38,9 @@ public class ArticleController {
     }
 
     @PostMapping("")
-    public String save(ArticleDto articleDto) {
-        Article saveArticle = articleDto.toEntity();
+    public String save(ArticleRequestDto articleRequestDto) {
+        log.info("title={}, content={}", articleRequestDto.getTitle(), articleRequestDto.getContent());
+        Article saveArticle = articleRequestDto.toEntity();
         repository.save(saveArticle);
         return "redirect:/articles/" + saveArticle.getId();
     }
@@ -70,8 +68,8 @@ public class ArticleController {
     }
 
     @PostMapping("{id}/update")
-    public String updateArticle(ArticleDto articleDto, Model model) {
-        Article saveArticle = repository.save(articleDto.toEntity());
+    public String updateArticle(ArticleRequestDto articleRequestDto, Model model) {
+        Article saveArticle = repository.save(articleRequestDto.toEntity());
         model.addAttribute("article", saveArticle);
         return "redirect:/articles/" + saveArticle.getId();
     }
