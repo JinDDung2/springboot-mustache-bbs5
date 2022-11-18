@@ -1,7 +1,10 @@
 package com.example.bbsexercise.domain.entitiy;
 
 import com.example.bbsexercise.domain.dto.HospitalResponseDto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +13,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "nation_wide_hospitals")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 public class Hospital {
 
