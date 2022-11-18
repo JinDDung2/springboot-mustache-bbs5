@@ -38,11 +38,11 @@ class HospitalServiceTest {
                 .build();
 
         when(hospitalRepository.findById(1)).thenReturn(Optional.of(hospital1));
-        when(hospitalRepository.findById(29)).thenReturn(Optional.of(hospital2));
         HospitalResponseDto openHospital = hospitalService.getHospital(1);
-        HospitalResponseDto closeHospital = hospitalService.getHospital(29);
-
         assertEquals("영업중", openHospital.getBusinessStatusName());
+
+        when(hospitalRepository.findById(29)).thenReturn(Optional.of(hospital2));
+        HospitalResponseDto closeHospital = hospitalService.getHospital(29);
         assertEquals("폐업", closeHospital.getBusinessStatusName());
 
     }
