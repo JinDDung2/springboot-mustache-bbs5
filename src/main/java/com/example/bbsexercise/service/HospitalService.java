@@ -5,6 +5,8 @@ import com.example.bbsexercise.domain.entitiy.Hospital;
 import com.example.bbsexercise.repository.HospitalRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,6 +17,11 @@ import java.util.Optional;
 public class HospitalService {
 
     private final HospitalRepository hospitalRepository;
+
+    public Page<HospitalResponseDto> getAll(String keyword, Pageable pageable) {
+        Page<Hospital> page = hospitalRepository.findByRoadNameAddressContaining(keyword, pageable);
+        return page.map(Hospital::of);
+    }
 
     public HospitalResponseDto getHospital(Integer id) {
         Optional<Hospital> findHospital = hospitalRepository.findById(id);

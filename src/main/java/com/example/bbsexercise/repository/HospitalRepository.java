@@ -9,9 +9,11 @@ import java.util.List;
 
 public interface HospitalRepository extends JpaRepository<Hospital, Integer> {
     List<Hospital> findByBusinessTypeNameIn(List<String> businessTypes);
-
     List<Hospital> findByBusinessTypeNameContainingAndRoadNameAddressContaining(String name, String city);
     List<Hospital> findByBusinessTypeNameInAndRoadNameAddressContaining(List<String> businessType, String city);
-
     List<Hospital> findByTotalNumberOfBedsBetweenOrderByTotalNumberOfBedsDesc(int startNum, int endNum);
+
+    Page<Hospital> findAll(Pageable pageable);
+    Page<Hospital> findByRoadNameAddressContaining(String keyword, Pageable pageable);
+
 }

@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/hospitals")
@@ -17,12 +20,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class HospitalController {
 
-    private final HospitalRepository repository;
+    private final HospitalRepository hospitalRepository;
 
     @GetMapping("")
-    public String list(Model model, Pageable pageable) {
-        Page<Hospital> hospitals = repository.findAll(pageable);
-        log.info("hospitals.size={}", hospitals.getSize());
+    public String list(@RequestParam(required = false) String keyword, Model model, Pageable pageable) {
+        Page<Hospital> hospitals;
+        if (keyword == null) {
+            hospitals = hospitalRepository.findAll(pageable);
+        } else {
+            hospitals = hospitalRepository.findByRoadNameAddressContaining(keyword, pageable);
+        }
+        log.info("keyword = {}, hospitals.size={}",keyword, hospitals.getSize());
+        model.addAttribute("keyword", keyword);
         model.addAttribute("hospitals", hospitals);
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next", pageable.next().getPageNumber());
@@ -30,11 +39,4 @@ public class HospitalController {
         model.addAttribute("hasNext", hospitals.hasNext());
         return "hospitals/list";
     }
-
-    /*@GetMapping("/search")
-    public String search(String keyword, Model model) {
-        List<Hospital> searchHospitals = service.search(keyword);
-        model.addAttribute("hospitals", searchHospitals);
-        return "hospitals";
-    }*/
 }
