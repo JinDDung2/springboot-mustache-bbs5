@@ -4,8 +4,8 @@
     <thead>
     <tr>
         <th scope="col">Id</th>
-        <th scope="col">Title</th>
-        <th scope="col">Content</th>
+        <th scope="col">제목</th>
+        <th scope="col">내용</th>
     </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -19,8 +19,8 @@
     </tbody>
 </table>
 {{# article}}
-    <a href="/articles/{{id}}/edit" class="btn btn-primary">Edit</a>
-    <a href="/articles/{{id}}/delete" class="btn btn-danger">Delete</a>
+    <a href="/articles/{{id}}/edit" class="btn btn-primary">수정</a>
+    <a href="/articles/{{id}}/delete" class="btn btn-danger">삭제</a>
     <a href="/articles" class="btn btn-info">목록</a>
 {{/ article}}
 {{> layouts/footer}}
