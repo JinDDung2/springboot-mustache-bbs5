@@ -2,6 +2,7 @@ package com.example.bbsexercise.domain.entitiy;
 
 import com.example.bbsexercise.domain.dto.ArticleResponseDto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ public class Article {
     private String title;
     private String content;
 
+    @Builder
     public Article(Long id, String title, String content) {
         this.id = id;
         this.title = title;

@@ -20,11 +20,6 @@ public class ArticleController {
 
     private final ArticleRepository repository;
 
-    @GetMapping("/new")
-    public String newForm() {
-        return "articles/new";
-    }
-
     @GetMapping("")
     public String index(Model model) {
         return "redirect:/articles/list";
@@ -37,14 +32,29 @@ public class ArticleController {
         return "articles/list";
     }
 
-    @PostMapping("")
+    @GetMapping("/new")
+    public String newForm() {
+        return "articles/new";
+    }
+
+    @PostMapping(value = "/new")
     public String save(ArticleRequestDto articleRequestDto) {
-        log.info("title={}, content={}", articleRequestDto.getTitle(), articleRequestDto.getContent());
+        log.info("게시글 저장. title={}, content={}", articleRequestDto.getTitle(), articleRequestDto.getContent());
         Article saveArticle = articleRequestDto.toEntity();
         repository.save(saveArticle);
         return "redirect:/articles/" + saveArticle.getId();
     }
 
+    @GetMapping("{id}/edit")
+    public String edit(@PathVariable Long id, ArticleRequestDto articleRequestDto, Model model) {
+        Optional<Article> findArticle = repository.findById(id);
+        if(!findArticle.isEmpty()) {
+            model.addAttribute("article", findArticle.get());
+            return "articles/edit";
+        } else {
+            return "articles/errors/error";
+        }
+    }
     @GetMapping("/{id}")
     public String findById(@PathVariable Long id, Model model) {
         Optional<Article> findArticle = repository.findById(id);
@@ -56,19 +66,9 @@ public class ArticleController {
         }
     }
 
-    @GetMapping("{id}/edit")
-    public String edit(@PathVariable Long id, Model model) {
-        Optional<Article> findArticle = repository.findById(id);
-        if(!findArticle.isEmpty()) {
-            model.addAttribute("article", findArticle.get());
-            return "articles/edit";
-        } else {
-            return "articles/errors/error";
-        }
-    }
-
     @PostMapping("{id}/update")
     public String updateArticle(ArticleRequestDto articleRequestDto, Model model) {
+        log.info("게시글 수정. title={}, content={}", articleRequestDto.getTitle(), articleRequestDto.getContent());
         Article saveArticle = repository.save(articleRequestDto.toEntity());
         model.addAttribute("article", saveArticle);
         return "redirect:/articles/" + saveArticle.getId();
@@ -76,6 +76,7 @@ public class ArticleController {
 
     @GetMapping("{id}/delete")
     public String deleteById(@PathVariable Long id) {
+        log.info("게시글 삭제. id={}", id);
         repository.deleteById(id);
         return "redirect:/articles";
     }
