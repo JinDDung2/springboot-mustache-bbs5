@@ -1,6 +1,7 @@
 package com.example.bbsexercise.service;
 
 import com.example.bbsexercise.domain.dto.VisitCreateRequest;
+import com.example.bbsexercise.domain.dto.VisitResponseDto;
 import com.example.bbsexercise.domain.entitiy.Hospital;
 import com.example.bbsexercise.domain.entitiy.User;
 import com.example.bbsexercise.domain.entitiy.Visit;
@@ -8,7 +9,12 @@ import com.example.bbsexercise.repository.HospitalRepository;
 import com.example.bbsexercise.repository.UserRepository;
 import com.example.bbsexercise.repository.VisitRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.awt.print.Pageable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +43,12 @@ public class VisitService {
                 .expense(request.getExpense())
                 .build();
         visitRepository.save(visit);
+    }
+
+    public List<VisitResponseDto> findAllPage(Pageable pageable) {
+        Page<Visit> visits = visitRepository.findAll(pageable);
+        return visits.stream()
+                .map(VisitResponseDto::of)
+                .collect(Collectors.toList());
     }
 }
