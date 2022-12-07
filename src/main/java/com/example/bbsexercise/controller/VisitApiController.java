@@ -31,4 +31,14 @@ public class VisitApiController {
     public ResponseEntity<List<VisitResponseDto>> findAll(Pageable pageable) {
         return ResponseEntity.ok().body(visitService.findAllPage(pageable));
     }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<List<VisitResponseDto>> findVisitsByUserId(@PathVariable Long id) {
+        return ResponseEntity.ok().body(visitService.findByUserId(id));
+    }
+
+    @GetMapping("/hospitals/{id}")
+    public ResponseEntity<List<VisitResponseDto>> findVisitsByHospitalId(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(visitService.findByHospitalId(id));
+    }
 }

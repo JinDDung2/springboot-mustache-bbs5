@@ -51,4 +51,22 @@ public class VisitService {
                 .map(VisitResponseDto::of)
                 .collect(Collectors.toList());
     }
+
+    public List<VisitResponseDto> findByUserId(Long userId) {
+        User findUser = userRepository.findById(userId).orElseThrow(() -> {
+            throw new RuntimeException("해당 유저가 없습니다.");
+        });
+
+        return visitRepository.findAllByUser(findUser).stream().map(VisitResponseDto::of)
+                .collect(Collectors.toList());
+    }
+
+    public List<VisitResponseDto> findByHospitalId(Integer hospitalId) {
+        Hospital findHospital = hospitalRepository.findById(hospitalId).orElseThrow(() -> {
+            throw new RuntimeException("해당 병원이 없습니다.");
+        });
+
+        return visitRepository.findByHospital(findHospital).stream().map(VisitResponseDto::of)
+                .collect(Collectors.toList());
+    }
 }
