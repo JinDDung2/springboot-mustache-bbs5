@@ -10,11 +10,13 @@ public class VisitCreateRequest {
     private Integer hospitalId;
     private String disease;
     private Integer expense;
+    private String createdDate;
 
     @Builder
-    public VisitCreateRequest(Integer hospitalId, String disease, Integer expense) {
+    public VisitCreateRequest(Integer hospitalId, String disease, Integer expense, String createdDate) {
         this.hospitalId = hospitalId;
         this.disease = disease;
         this.expense = expense;
+        this.createdDate = createdDate;
     }
 }
