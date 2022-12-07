@@ -3,12 +3,16 @@ server:
     encoding:
       force-response: true
 
+jwt:
+  token:
+    secret: hello
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:8080/exercise-db
+    url: jdbc:mysql://localhost:8080/bbs-db
     username: root
-    password: 1234
+    password:
   jpa:
     database: mysql
     show-sql: true
