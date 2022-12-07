@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class HospitalResponseDto {
@@ -20,8 +18,19 @@ public class HospitalResponseDto {
     private String businessStatusName;
     private Float totalAreaSize;
 
-
     public void setBusinessStatusName(String businessStatusName) {
         this.businessStatusName = businessStatusName;
+    }
+
+    @Builder
+    public HospitalResponseDto(Integer id, String roadNameAddress, String hospitalName, Integer patientRoomCount, Integer totalNumberOfBeds, String businessTypeName, String businessStatusName, Float totalAreaSize) {
+        this.id = id;
+        this.roadNameAddress = roadNameAddress;
+        this.hospitalName = hospitalName;
+        this.patientRoomCount = patientRoomCount;
+        this.totalNumberOfBeds = totalNumberOfBeds;
+        this.businessTypeName = businessTypeName;
+        this.businessStatusName = businessStatusName;
+        this.totalAreaSize = totalAreaSize;
     }
 }
