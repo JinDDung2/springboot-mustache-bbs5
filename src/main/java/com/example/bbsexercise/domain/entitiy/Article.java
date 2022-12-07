@@ -13,9 +13,11 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Getter
+@Table(name = "articles")
 public class Article {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "article_id")
     private Long id;
     private String title;
     private String content;
