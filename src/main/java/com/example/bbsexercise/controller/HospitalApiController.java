@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/hospitals")
 @RequiredArgsConstructor
 @Slf4j
-public class HospitalRestController {
+public class HospitalApiController {
 
     private final HospitalService hospitalService;
 
