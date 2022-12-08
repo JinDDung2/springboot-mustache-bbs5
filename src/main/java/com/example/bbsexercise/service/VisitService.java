@@ -24,7 +24,7 @@ public class VisitService {
     private final HospitalRepository hospitalRepository;
     private final UserRepository userRepository;
 
-    public void createVisit(VisitCreateRequest request, String username) {
+    public void createVisit(VisitCreateRequest request, String userName) {
 
         // hospital 없을 때
         Hospital findHospital = hospitalRepository.findById(request.getHospitalId()).orElseThrow(() -> {
@@ -32,7 +32,7 @@ public class VisitService {
         });
 
         // user 없을 때
-        User findUser = userRepository.findByUserName(username).orElseThrow(() -> {
+        User findUser = userRepository.findByUserName(userName).orElseThrow(() -> {
             throw new RuntimeException("찾는 유저가 없습니다.");
         });
 
