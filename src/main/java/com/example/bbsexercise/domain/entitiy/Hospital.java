@@ -28,9 +28,6 @@ public class Hospital {
     @Column(name = "hospital_name")
     private String hospitalName;
 
-    @OneToMany(mappedBy = "hospital")
-    private List<Visit> visits = new ArrayList<>();
-
     private Integer patientRoomCount;
     private Integer totalNumberOfBeds;
     private String businessTypeName;
