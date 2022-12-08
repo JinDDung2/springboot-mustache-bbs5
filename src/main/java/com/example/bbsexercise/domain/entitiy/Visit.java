@@ -27,5 +27,4 @@ public class Visit extends BaseEntity{
     private String disease;
 
     private Integer expense;
-
 }
