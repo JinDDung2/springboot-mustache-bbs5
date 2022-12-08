@@ -33,7 +33,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         final String requestHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         log.info("requestHeader={}", requestHeader);
 
-        if (requestHeader != null || !requestHeader.startsWith("Bearer ")) {
+        if (requestHeader == null || !requestHeader.startsWith("Bearer ")) {
             log.error("헤더를 가져오는 과정에서 에러가 났습니다. 헤더가 Null 이거나 잘못되었습니다.");
             filterChain.doFilter(request, response);
             return;
@@ -55,10 +55,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             return;
         }
 
-        // 허락하는 경우
+        String userName = JwtTokenUtil.getUserName(token, secretKey);
+        log.info("token userName={}", userName);
 
+        // 허락하는 경우
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken("", null, List.of(new SimpleGrantedAuthority("USER")));
+                new UsernamePasswordAuthenticationToken(userName, null, List.of(new SimpleGrantedAuthority("USER")));
 
         // Detail
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
