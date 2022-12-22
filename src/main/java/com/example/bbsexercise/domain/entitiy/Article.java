@@ -34,4 +34,9 @@ public class Article {
         return new ArticleResponseDto(
                 article.getId(), article.getTitle(), article.getContent());
     }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }
